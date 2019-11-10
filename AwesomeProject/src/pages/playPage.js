@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component } from 'react'
-import { Text, StyleSheet, View,Button, AlertIOS,Dimensions,TouchableOpacity } from 'react-native'
+import { Platform,Text, StyleSheet, View,Button, AlertIOS,Dimensions,TouchableOpacity } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import VideoPlayer from 'react-native-video-controls';
 export default class playPage extends Component {
@@ -31,35 +31,15 @@ export default class playPage extends Component {
     };
     constructor(props){
 				super(props);
-				this.state = {
-					rate: 1,
-					volume: 1,
-					muted: false,
-					resizeMode: 'contain',
-					duration: 0.0,
-					currentTime: 0.0,
-					controls: false,
-					paused: false,
-					skin: 'custom',
-					ignoreSilentSwitch: null,
-					isBuffering: false,
-					filterEnabled: true
-				};
 				Navigation.events().bindComponent(this);
-				// VideoPlayer.events().bindComponent(this);
-				// this.onLayout = this.onLayout.bind(this);
-				// this.onBackBack = this.onBackBack.bind(this);
-      };
-		componentDidAppear(){
-			Navigation.mergeOptions(this.props.componentId, {
-				topBar: {
-					visible: false
-				}
-			});
-		};
+    };
 		navigationButtonPressed({ buttonId }) {
 			if(buttonId == 'paly_back_button'){
-				Navigation.pop(this.props.componentId);
+				if(Platform.OS === 'ios'){
+					Navigation.pop(this.props.componentId);
+				}else {
+					Navigation.dismissModal(this.props.componentId);
+				}
 			}
 		}
     render() {
@@ -106,7 +86,11 @@ export default class playPage extends Component {
 			// alert('onPlay');
 		};
 		onBack(){
-			Navigation.pop(this.props.componentId);
+			if(Platform.OS === 'ios'){
+				Navigation.pop(this.props.componentId);
+			}else {
+				Navigation.dismissModal(this.props.componentId);
+			}
 		};
 		onEnd(){
 			// alert('onEnd');

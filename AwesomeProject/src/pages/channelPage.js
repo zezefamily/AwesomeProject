@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, Button, FlatList,TouchableOpacity } from 'react-native'
+import {Platform, Text, StyleSheet, View, Button, FlatList,TouchableOpacity } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import ChannelList from '../../liveResource.json';
 export default class myPage extends Component {
@@ -67,14 +67,26 @@ export default class myPage extends Component {
   |--------------------------------------------------
   */
   _cellDidSelected(item,index){
-    Navigation.push(this.props.componentId, {
-      component: {
-        name: 'PlayPage',
-        passProps: { //传参
-          data: item
+    if(Platform.OS === "ios"){
+      Navigation.push(this.props.componentId, {
+        component: {
+          name: 'PlayPage',
+          passProps: { //传参
+            data: item
+          }
         }
-      }
-    });
+      });
+    }else{
+      Navigation.showModal({
+        component: {
+          name: 'PlayPage',
+          passProps: { //传参
+            data: item
+          }
+        }
+      });
+    }
+    
   }
 }
 

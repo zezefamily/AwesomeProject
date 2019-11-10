@@ -51,8 +51,8 @@ export default class homePage extends Component {
   render() {
     return (
       <View style={styles.content}>
-        <Text> Home Page {this.state.text}  </Text>
-        <View><Button title="Touch Me" onPress={this._buttonClicked.bind(this)} /></View>
+        <Text style={{color:'#1296db'}}>探索未知的世界...</Text>
+        {/* <View><Button title="Touch Me" onPress={this._buttonClicked.bind(this)} /></View> */}
       </View>
       
     )

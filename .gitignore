@@ -1,1 +1,4 @@
 /AwesomeProject/node_modules/
+/AwesmoeProject/android/app/my-release-key.keystore
+/AwesomeProject/android/app/debug.keystore
+/Users/guoyuze/AwesomeProject/AwesomeProject/android/app/build/outputs/apk
